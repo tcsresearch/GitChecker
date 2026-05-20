@@ -3,6 +3,10 @@
 # This script checks subdirectories to see if they are Git repos.
 #
 
+# ShellCheck: Disable color warnings.
+# shellcheck disable=SC2154
+
+
 # TODO: Enable Cecho
 # 	Also show folder that are NOT Git repos.
 #
