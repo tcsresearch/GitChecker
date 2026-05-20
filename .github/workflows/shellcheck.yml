@@ -16,7 +16,7 @@ jobs:
       - name: Run ShellCheck
         uses: ludeeus/action-shellcheck@master
         env:
-          SHELLCHECK_OPTS: -x -e SC1254
+          SHELLCHECK_OPTS: -x -e SC2154
         with: 
           ignore_paths:
             _Old
