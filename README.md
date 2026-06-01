@@ -3,3 +3,10 @@ Checks to see if folders are Git repos or not
 <p>
   <img src="https://github.com/tcsresearch/GitChecker/blob/main/Screenshot_2026-04-30_15-24-59.png"
 </p>
+
+<hr>
+<p>
+  :white_check_mark: This code was verified as ShellCheck compliant as of 05/31/2026. <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Code added after this date may or may not remain in compliance.
+</p>
+<hr>
