@@ -30,7 +30,7 @@ for item in */; do
   is_git=$(git -C "$dir_name" rev-parse --is-inside-work-tree 2>/dev/null)
 
   # Apply the case statement for display logic
-  case 1 in
+  case $1 in
     $("$show_all") )
       echo "[ALL] $item"
       ;;
