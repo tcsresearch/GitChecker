@@ -108,7 +108,7 @@ while [[ "$#" -gt 0 ]]; do
             ;;
     esac
     shift # Move to the next argument
-esac
+done
 
 # --- Script Logic Begins Here ---
 if [ "$SHOW_ALL" = true ]; then
