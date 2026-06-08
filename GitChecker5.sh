@@ -116,9 +116,9 @@ done
 if [ "$SHOW_ALL" = true ]; then
     RunChecks
 elif [ "$SHOW_GIT_ONLY" = true ]; then
-     echo ${red} "Not Implemented Yet! ${reset}"
+     echo "${red} Not Implemented Yet! ${reset}"
 elif [ "$SHOW_NONGIT_ONLY" = true ]; then
-     echo ${red} "Not Implemented Yet! ${reset}"
+     echo "${red} Not Implemented Yet! ${reset}"
 fi
 
 if [ "$UPDATE" = true ]; then
