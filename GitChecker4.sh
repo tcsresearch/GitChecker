@@ -65,9 +65,9 @@ function UpdateRepos() {
 	for d in */; do
 	(
           if [ -d "$d/.git" ]; then
-             cd "$d"
+             cd "$d" || return
              git pull
-             cd -
+             cd - || return
           fi
 	)
 	done
