@@ -122,11 +122,11 @@ elif [ "$SHOW_NONGIT_ONLY" = true ]; then
 fi
 
 if [ "$UPDATE" = true ]; then
-    echo ${green} "Updating Repos... ${reset}"
+    echo "${green} Updating Repos... ${reset}"
 	UpdateRepos
 	echo " "
 elif [ "$UPDATE_ALL" = true ]; then
-    echo ${green} "Updating Repos... ${reset}"
+    echo "${green} Updating Repos... ${reset}"
 	UpdateRepos
 	echo " "
 fi
