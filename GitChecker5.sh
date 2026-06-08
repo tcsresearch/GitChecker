@@ -75,23 +75,61 @@ function UpdateRepos() {
 ###################################################################
 # CASE Statement #                                                #
 ###################################################################
-case "OPTS" in
-    --show-git-only)
-        echo ${red} "Not Implemented Yet! ${reset}"
-        ;;
-    --show-nongit-only)
-        echo ${red} "Not Implemented Yet! ${reset}"
-        ;;
-	--show-all)
-        RunChecks | column -t
-        ;;
-	--update-all| --update)
-        UpdateRepos
-        ;;
-    *)
-        # Default fallback commands if nothing else matches
-        ;;
+
+# Initialize variables to false or empty
+SHOW_ALL=false
+SHOW_GIT_ONLY=false
+SHOW_NONGIT_ONLY=false
+UPDATE=false
+UPDATE_ALL=false
+
+# Loop through all arguments
+while [[ "$#" -gt 0 ]]; do
+    case "$1" in
+        --show-all)
+            SHOW_ALL=true
+            ;;
+        --show-git-only)
+            SHOW_GIT_ONLY=true
+            ;;
+        --show-nongit-only)
+            SHOW_NONGIT_ONLY=true
+            ;;
+        --update)
+            UPDATE=true
+            ;;
+        --update-all)
+            UPDATE_ALL=true
+            ;;
+        *)
+            echo "Unknown parameter passed: $1"
+            echo "Usage: $0 [--show-all] [--show-git-only] [--show-nongit-only] [--update] [--update-all]"
+            exit 1
+            ;;
+    esac
+    shift # Move to the next argument
 esac
+
+# --- Script Logic Begins Here ---
+if [ "$SHOW_ALL" = true ]; then
+    RunChecks
+elif [ "$SHOW_GIT_ONLY" = true ]; then
+     echo ${red} "Not Implemented Yet! ${reset}"
+elif [ "$SHOW_NONGIT_ONLY" = true ]; then
+     echo ${red} "Not Implemented Yet! ${reset}"
+fi
+
+if [ "$UPDATE" = true ]; then
+    echo ${green} "Updating Repos... ${reset}"
+	UpdateRepos
+	echo " "
+elif [ "$UPDATE_ALL" = true ]; then
+    echo ${green} "Updating Repos... ${reset}"
+	UpdateRepos
+	echo " "
+fi
+
+
 
 
 ##################################################################
