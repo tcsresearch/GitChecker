@@ -62,12 +62,14 @@ function RunChecks() {
 
 function UpdateRepos() {
 # Update Repos  
-	for d in */; do
+	for d in */; do 
+		(
           if [ -d "$d/.git" ]; then
-             cd $d
+             cd "$d" || return
              git pull
-             cd -
+             cd - || return
           fi
+		)
 	done
 }
 
