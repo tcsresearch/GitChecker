@@ -31,13 +31,13 @@ for item in */; do
 
   # Apply the case statement for display logic
   case $1 in
-    $("$show_all") )
+    "$("$show_all") )"
       echo "[ALL] $item"
       ;;
-    $("$git_only" && [[ "$is_git" == "true" ]]) )
+    "$("$git_only" && [[ "$is_git" == "true" ]]) )"
       echo "[GIT] $item"
       ;;
-    $("$nongit_only" && [[ -z "$is_git" ]]) )
+    "$("$nongit_only" && [[ -z "$is_git" ]]) )"
       echo "[NON-GIT] $item"
       ;;
   esac
