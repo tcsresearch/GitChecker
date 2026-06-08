@@ -10,3 +10,7 @@ Checks to see if folders are Git repos or not
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Code added after this date (GitChecker4.sh and GitChecker-ng.sh) may or may not remain in compliance.
 </p>
 <hr>
+
+<p>Began work on GitChecker-ng.sh but it is currently NOT ready yet!<br>
+GitChecker5.sh works but is missing features and has some display bugs. <br>
+</p>
