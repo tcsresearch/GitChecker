@@ -11,6 +11,8 @@ Checks to see if folders are Git repos or not
 </p>
 <hr>
 
-<p>Began work on GitChecker-ng.sh but it is currently NOT ready yet!<br>
-GitChecker5.sh works but is missing features and has some display bugs. <br>
+<p>
+  Began work on GitChecker-ng.sh but it is currently NOT ready yet!<br>
+  GitChecker5.sh works but is missing features and has some display bugs. <br>
+  GitChecker4.sh replaced GitChecker3.sh and adds an UpdateRepos function that currently needs to be called manually by modifying the script. <br>
 </p>
