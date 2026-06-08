@@ -75,11 +75,17 @@ function UpdateRepos() {
 ###################################################################
 # CASE Statement #                                                #
 ###################################################################
-case "EXPRESSION" in
-    PATTERN_1)
+case "OPTS" in
+    --show-git-only)
         # Commands to run if PATTERN_1 matches
         ;;
-    PATTERN_2|PATTERN_3)
+    --show-nongit-only)
+        # Commands to run if PATTERN_2 or PATTERN_3 matches
+        ;;
+	--show-all)
+        # Commands to run if PATTERN_2 or PATTERN_3 matches
+        ;;
+	--update-all| --update)
         # Commands to run if PATTERN_2 or PATTERN_3 matches
         ;;
     *)
