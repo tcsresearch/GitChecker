@@ -77,16 +77,16 @@ function UpdateRepos() {
 ###################################################################
 case "OPTS" in
     --show-git-only)
-        # Commands to run if PATTERN_1 matches
+        echo ${red} "Not Implemented Yet! ${reset}"
         ;;
     --show-nongit-only)
-        # Commands to run if PATTERN_2 or PATTERN_3 matches
+        echo ${red} "Not Implemented Yet! ${reset}"
         ;;
 	--show-all)
-        # Commands to run if PATTERN_2 or PATTERN_3 matches
+        RunChecks | column -t
         ;;
 	--update-all| --update)
-        # Commands to run if PATTERN_2 or PATTERN_3 matches
+        UpdateRepos
         ;;
     *)
         # Default fallback commands if nothing else matches
@@ -105,7 +105,7 @@ NewLine
 DisplayBanner
 DisplayLine
 NewLine
-RunChecks | column -t
+# RunChecks | column -t
 
 
 NewLine
