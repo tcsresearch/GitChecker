@@ -145,7 +145,7 @@ NewLine
 DisplayBanner
 DisplayLine
 NewLine
-# RunChecks | column -t
+RunChecks | column -t
 
 
 NewLine
