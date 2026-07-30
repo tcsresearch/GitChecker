@@ -11,6 +11,12 @@ Checks to see if folders are Git repos or not, with Git repo update/checkupdate 
 </p>
 <hr>
 
+<hr>
+<p> <h4> Usage </h4>
+  Usage: GitChecker5-v3.sh [--show-config] [--show-all] [--show-git-only] [--show-nongit-only] [--checkupdate] [--checkupdate-all] [--update] [--update-all]
+</p>
+
+
 <p> <h4> GitChecker5-v3.sh </h4>
   <ul>
     <li> SplitConfig Enabled. </li>
