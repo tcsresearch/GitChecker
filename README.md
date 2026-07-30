@@ -11,6 +11,18 @@ Checks to see if folders are Git repos or not
 </p>
 <hr>
 
+<p> <h4> GitChecker5-v3.sh </h4>
+  <ul>
+    <li> SplitConfig Enabled. </li>
+    <li> Added several functions, incl. ShowConfig(), NewLineCinema(), and DisplayLine_U(). </li>
+    <li> Began implementation of CheckUpdate and CheckUpdate_All functionality. </li>
+    <li> Script works but is missing features and has some display bugs. </li>
+    <li> Script doesn't have --show-git-only and --show-nongit-only fully implemented yet </li>
+    <li> Variables for --show-git-only and --show-nongit-only exist and are set, but no code uses them yet. </li>
+  </ul>
+</p>
+<hr>
+
 <p> <h4> GitChecker5-v2.sh </h4>
   <ul>
     <li> Script works but is missing features and has some display bugs. </li>
