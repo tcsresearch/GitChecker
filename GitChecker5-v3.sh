@@ -16,16 +16,17 @@
 #################################################################################################
 
 # Define Colors File & Location
-COLORS_DIR="$(pwd)"
+COLORS_DIR="$(pwd)/config"
 COLORS_FILE="Colors.conf"
 
 # Define Config File & Location
-CONFIG_DIR="$(pwd)"
+CONFIG_DIR="$(pwd)/config"
 CONFIG_FILE="GitChecker.conf"
 
 # Define Functions File & Location
-FUNCTIONS_DIR="$(pwd)"
-FUNCTIONS_FILE="GitChecker.bfunc"
+FUNCTIONS_DIR="$(pwd)/functions"
+FUNCTIONS_FILE_MAIN="GitChecker.bfunc"
+FUNCTIONS_FILE_UPDATER="GitChecker_UpdateChecker.conf"
 
 
 
@@ -44,11 +45,18 @@ if [ -f "$CONFIG_DIR"/"$CONFIG_FILE" ]; then
 fi
 
 
-# Source our Functions Library
+# Source our Functions Library (Main)
 # TODO: Upgrade if statement to produce an error if file not found.
-if [ -f "$FUNCTIONS_DIR"/"$FUNCTIONS_FILE" ]; then
+if [ -f "$FUNCTIONS_DIR"/"$FUNCTIONS_FILE_MAIN" ]; then
                 # shellcheck source=/dev/null
-        source "$FUNCTIONS_DIR"/"$FUNCTIONS_FILE"
+        source "$FUNCTIONS_DIR"/"$FUNCTIONS_FILE_MAIN"
+fi
+
+# Source our Functions Library (Updater)
+# TODO: Upgrade if statement to produce an error if file not found.
+if [ -f "$FUNCTIONS_DIR"/"$FUNCTIONS_FILE_UPDATER" ]; then
+                # shellcheck source=/dev/null
+        source "$FUNCTIONS_DIR"/"$FUNCTIONS_FILE_UPDATER"
 fi
 
 
@@ -74,7 +82,7 @@ fi
  RunChecks | column -t
 # RunChecks 
 
-# New Aug 08, 2026
+# New Aug 05, 2026
   # CheckUpdate_New | column -t
   
 
