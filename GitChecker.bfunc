@@ -183,6 +183,24 @@ function CheckUpdate_New2() {
     done
 }
 
+function CheckUpdate_New3() {
+    # Check Repos For Updates & display Yes or No
+    for d in */; do
+        if [ -d "$d/.git" ]; then
+                cd "$d" || exit 1
+                # Fetch upstream data quietly
+                git fetch &>/dev/null || exit 1
+                # Compare local HEAD with the upstream tracking branch
+                if [ "$(git rev-parse HEAD)" = "$(git rev-parse @{u})" ]; then
+                    echo -e " ${white}${d%/}: ${red}[No]${reset} "
+                else
+                    echo -e " ${white}${d%/}: ${green}[Yes]${reset} "
+                fi
+		else
+			echo -e " ${white}${d%/}: ${red} [ Not A Git Folder! ] ${reset} "
+        fi
+    done
+}
 
 
 function UpdateRepo() {
