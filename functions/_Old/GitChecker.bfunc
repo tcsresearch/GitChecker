@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # This function library checks subdirectories to see if they are Git repos.
-# Last Updated: Wed Aug 05, 2026.
+# Last Updated: Wed Jul 29, 2026.
 
 # ShellCheck: Disable color warnings.
 # shellcheck disable=SC2154
@@ -17,8 +17,7 @@
 
 
 ##################################################################################################
-# Display Functions #																			 #
-##################################################################################################
+
 
 function DisplayLine() {
 	echo " ${brightblue}--------------------------------------------------${reset} "
@@ -44,8 +43,6 @@ function DisplayBanner() {
 	# DisplayLine
 	echo " ${brightblue} Git Status Of Directories Is Displayed Below: ${reset}"
 }
-
-
 
 function ShowConfig() {
 
@@ -103,22 +100,6 @@ function ChecksBanner() {
 	echo " "
 }
 
-function DisplayUpdateStatus() { # For use within the CheckUpdate_New function
-# Fetch upstream data quietly
-                git fetch &>/dev/null || return 1
-                # Compare local HEAD with the upstream tracking branch
-                if [ "$(git rev-parse HEAD)" = "$(git rev-parse @{u})" ]; then
-                    echo -e " ${white}${d%/}: ${red}[No]${reset} "
-                else
-                    echo -e " ${white}${d%/}: ${green}[Yes]${reset} "
-                fi	
-}
-
-
-##################################################################################################
-# Main Functions #   																			 #
-##################################################################################################
-
 function RunChecks() {
 # Run Checks  
 	for d in */; do
@@ -160,85 +141,6 @@ function CheckUpdate_All() {
                 )
         done
 }
-
-
-function CheckUpdate_New() {
-    # Check Repos For Updates & display Yes or No
-    for d in */; do
-        if [ -d "$d/.git" ]; then
-            # Use a subshell () instead of 'cd -' to safely isolate directory changes
-            (
-                cd "$d" || exit 1
-                
-                # Fetch upstream data quietly
-                git fetch &>/dev/null || exit 1
-                
-                # Compare local HEAD with the upstream tracking branch
-                if [ "$(git rev-parse HEAD)" = "$(git rev-parse @{u})" ]; then
-                    echo -e " ${white}${d%/}: ${red}[No]${reset} "
-                else
-                    echo -e " ${white}${d%/}: ${green}[Yes]${reset} "
-                fi
-            )
-        fi
-    done
-}
-
-
-function CheckUpdate_New2() {
-    # Check Repos For Updates & display Yes or No
-    for d in */; do
-        if [ -d "$d/.git" ]; then
-                cd "$d" || return 1
-                # Fetch upstream data quietly
-                git fetch &>/dev/null || return 1
-                # Compare local HEAD with the upstream tracking branch
-                if [ "$(git rev-parse HEAD)" = "$(git rev-parse @{u})" ]; then
-                    echo -e " ${white}${d%/}: ${red}[No]${reset} "
-                else
-                    echo -e " ${white}${d%/}: ${green}[Yes]${reset} "
-                fi
-        fi
-    done
-}
-
-function CheckUpdate_New3() {
-    # Check Repos For Updates & display Yes or No
-    for d in */; do
-        if [ -d "$d/.git" ]; then 
-			# Use a subshell () instead of 'cd -' to safely isolate directory changes
-            (
-                cd "$d" || exit 1
-                
-                # Compare local HEAD with the upstream tracking branch
-                if [ "$(git rev-parse HEAD)" = "$(git rev-parse @{u})" ]; then
-                    echo -e " ${white}${d%/}: ${red}[No]${reset} "
-                else
-                    echo -e " ${white}${d%/}: ${green}[Yes]${reset} "
-                fi
-		else
-			echo -e " ${white}${d%/}: ${red} [ Not A Git Folder! ] ${reset} "
-        fi
-    	)
-	done
-}
-
-function CheckUpdate_New4() {
-    # Check Repos For Updates & display Yes or No
-    for d in */; do
-        if [ -d "$d/.git" ]; then
-			# Use a subshell () instead of 'cd -' to safely isolate directory changes
-            (
-                cd "$d" || exit 1
-                
-               DisplayUpdateStatus # Function Call
-		else
-			echo -e " ${white}${d%/}: ${red} [ Not A Git Folder! ] ${reset} "
-        )
-		fi
-    done
-}
-
 
 
 function UpdateRepo() {
@@ -346,4 +248,58 @@ function ScriptLogic() {
 
 
 
-##################################################################
+###################################################################!/usr/bin/env bash
+
+# This script checks subdirectories to see if they are Git repos.
+# Last Updated: Wed July 29, 2026
+
+# ShellCheck: Disable color warnings.
+# shellcheck disable=SC2154
+
+
+# TODO: Add CASE statment for --show-git-only and --show-nongit-only and --show-all
+# 	    Add 'git pull' feature to update all repos via --update-all
+#       Add feature to show update available with listing.
+
+#################################################################################################
+# Version #											#
+#################################################################################################
+
+   VERSION="26.07"
+   LAST_UPDATED="Wed Jul 29, 2026"
+
+
+#################################################################################################
+# Colors & Functions #										#
+#################################################################################################
+
+# Colors for Cecho-like output
+   COLORS_DIR="$(pwd)"
+   COLORS_FILE="Colors.conf"
+
+# Define Config Folder / File
+   CONFIG_DIR="$(pwd)"
+   CONFIG_FILE="GitChecker.bfunc"
+
+
+# Define Functions Library Folder / File
+   FUNCTIONS_DIR="$(pwd)"
+   FUNCTIONS_FILE="GitChecker.bfunc"
+
+
+#################################################################################################
+# Configuration #										#
+#################################################################################################
+
+   # Display Settings
+   SHOW_ALL="false"
+   SHOW_GIT_ONLY="false"
+   SHOW_NONGIT_ONLY="false"
+
+   # CheckUpdate Settings
+   CHECKUPDATE="false"
+   CHECKUPDATE_ALL="false"
+
+   # Update Settings
+   UPDATE="false"
+   UPDATE_ALL="false"
