@@ -16,6 +16,16 @@ Checks to see if folders are Git repos or not, with Git repo update/checkupdate 
   Usage: GitChecker5-v3.sh [--show-config] [--show-all] [--show-git-only] [--show-nongit-only] [--checkupdate] [--checkupdate-all] [--update] [--update-all]
 </p>
 
+<hr>
+
+<p> <h4> ColumnTest1.sh - Modified copy of GitChecker5-v3.sh with enhanced column aligned display and update availability status (WIP!) </h4>
+  <ul>
+    <li> Display alignment needs adjustment. </li>
+    <li> Likely subshell calls need to be altered and/or removed. </li>
+    <li> Output takes a little time to load. </li>
+  </ul>
+</p>
+<hr>
 
 <p> <h4> GitChecker5-v3.sh </h4>
   <ul>
