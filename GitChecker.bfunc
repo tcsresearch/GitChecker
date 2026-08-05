@@ -205,10 +205,11 @@ function CheckUpdate_New2() {
 function CheckUpdate_New3() {
     # Check Repos For Updates & display Yes or No
     for d in */; do
-        if [ -d "$d/.git" ]; then
-                cd "$d" || return 1
-                # Fetch upstream data quietly
-                git fetch &>/dev/null || return 1
+        if [ -d "$d/.git" ]; then 
+			# Use a subshell () instead of 'cd -' to safely isolate directory changes
+            (
+                cd "$d" || exit 1
+                
                 # Compare local HEAD with the upstream tracking branch
                 if [ "$(git rev-parse HEAD)" = "$(git rev-parse @{u})" ]; then
                     echo -e " ${white}${d%/}: ${red}[No]${reset} "
@@ -217,7 +218,8 @@ function CheckUpdate_New3() {
                 fi
 		else
 			echo -e " ${white}${d%/}: ${red} [ Not A Git Folder! ] ${reset} "
-        fi
+        )
+		fi
     done
 }
 
@@ -225,11 +227,15 @@ function CheckUpdate_New4() {
     # Check Repos For Updates & display Yes or No
     for d in */; do
         if [ -d "$d/.git" ]; then
-                cd "$d" || return 1
-                DisplayUpdateStatus # Function Call
+			# Use a subshell () instead of 'cd -' to safely isolate directory changes
+            (
+                cd "$d" || exit 1
+                
+               DisplayUpdateStatus # Function Call
 		else
 			echo -e " ${white}${d%/}: ${red} [ Not A Git Folder! ] ${reset} "
-        fi
+        )
+		fi
     done
 }
 
