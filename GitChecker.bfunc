@@ -100,13 +100,17 @@ function ChecksBanner() {
 	echo " "
 }
 
+# Updated Aug 5, 2026 for cleaner display, incl. removal of trailing slash at end of folder name via $clean_d.
 function RunChecks() {
 # Run Checks  
 	for d in */; do
+		  clean_d="${dir%/}"   # Added for removal of trailing slash at end of folder name.
           if [ -d "$d/.git" ]; then
-             echo " ${white} $d: ${green} [Yes] ${reset} "
+             # echo " ${white} $d: ${green} [Yes] ${reset} "
+			 echo " ${white} $clean_d: ${green} [Yes] ${reset} "
      	  else 
-  	     echo " ${white} $d: ${red} [No]  ${reset} "
+  	     # echo " ${white} $d: ${red} [No]  ${reset} "
+		 echo " ${white} $clean_d: ${red} [No]  ${reset} "
      	  fi
 	done
 }
@@ -117,7 +121,7 @@ function CheckUpdate() {
 # TODO: Modify for single repo usage specified by cmdline parameter.
 	 for d in */; do
                 (
-          if [ -d "$d/.git" ]; then
+		  if [ -d "$d/.git" ]; then
              cd "$d" || return
 	     git fetch
 	     git status -uno
