@@ -104,13 +104,13 @@ function ChecksBanner() {
 function RunChecks() {
 # Run Checks  
 	for d in */; do
-		  clean_d="${dir%/}"   # Added for removal of trailing slash at end of folder name.
+		  clean_d="${dir%/}"   # Added for removal of trailing slash at end of folder name (currently broken?).
           if [ -d "$d/.git" ]; then
-             # echo " ${white} $d: ${green} [Yes] ${reset} "
-			 echo " ${white} $clean_d: ${green} [Yes] ${reset} "
+             echo " ${white} $d: ${green} [Yes] ${reset} "
+			 # echo " ${white} $clean_d: ${green} [Yes] ${reset} "
      	  else 
-  	     # echo " ${white} $d: ${red} [No]  ${reset} "
-		 echo " ${white} $clean_d: ${red} [No]  ${reset} "
+  	     echo " ${white} $d: ${red} [No]  ${reset} "
+		 # echo " ${white} $clean_d: ${red} [No]  ${reset} "
      	  fi
 	done
 }
