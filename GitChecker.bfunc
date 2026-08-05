@@ -229,8 +229,8 @@ function CheckUpdate_New4() {
                 cd "$d" || exit 1
                 
                DisplayUpdateStatus # Function Call
-		else
-			echo -e " ${white}${d%/}: ${red} [ Not A Git Folder! ] ${reset} "
+		### else
+		###	echo -e " ${white}${d%/}: ${red} [ Not A Git Folder! ] ${reset} "
         )
 		fi
     done
