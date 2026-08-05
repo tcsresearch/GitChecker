@@ -61,7 +61,8 @@ function ShowConfig() {
 	DisplayLine
 	echo " ${brightyellow}   Colors File: $COLORS_FILE ${reset} "
 	echo " ${brightyellow}   Config File: $CONFIG_FILE ${reset} "
-	echo " ${brightyellow}   Functions File: $FUNCTIONS_FILE ${reset} "
+	echo " ${brightyellow}   Functions File (Main): $FUNCTIONS_FILE_MAIN ${reset} "
+	echo " ${brightyellow}   Functions File (Updater): $FUNCTIONS_FILE_UPDATER ${reset} "
 	echo " "
 
 	# Display Settings
@@ -101,17 +102,6 @@ function ChecksBanner() {
 	# New banner header for display of folders provided by RunChecks().
 	echo " ${brightyellow} Folder Name	   		    Is Git?	Update Available? ${reset} "
 	echo " "
-}
-
-function DisplayUpdateStatus() { # For use within the CheckUpdate_New function
-# Fetch upstream data quietly
-                git fetch &>/dev/null || return 1
-                # Compare local HEAD with the upstream tracking branch
-                if [ "$(git rev-parse HEAD)" = "$(git rev-parse @{u})" ]; then
-                    echo -e " ${white}${d%/}: ${red}[No]${reset} "
-                else
-                    echo -e " ${white}${d%/}: ${green}[Yes]${reset} "
-                fi	
 }
 
 
@@ -160,85 +150,6 @@ function CheckUpdate_All() {
                 )
         done
 }
-
-
-function CheckUpdate_New() {
-    # Check Repos For Updates & display Yes or No
-    for d in */; do
-        if [ -d "$d/.git" ]; then
-            # Use a subshell () instead of 'cd -' to safely isolate directory changes
-            (
-                cd "$d" || exit 1
-                
-                # Fetch upstream data quietly
-                git fetch &>/dev/null || exit 1
-                
-                # Compare local HEAD with the upstream tracking branch
-                if [ "$(git rev-parse HEAD)" = "$(git rev-parse @{u})" ]; then
-                    echo -e " ${white}${d%/}: ${red}[No]${reset} "
-                else
-                    echo -e " ${white}${d%/}: ${green}[Yes]${reset} "
-                fi
-            )
-        fi
-    done
-}
-
-
-function CheckUpdate_New2() {
-    # Check Repos For Updates & display Yes or No
-    for d in */; do
-        if [ -d "$d/.git" ]; then
-                cd "$d" || return 1
-                # Fetch upstream data quietly
-                git fetch &>/dev/null || return 1
-                # Compare local HEAD with the upstream tracking branch
-                if [ "$(git rev-parse HEAD)" = "$(git rev-parse @{u})" ]; then
-                    echo -e " ${white}${d%/}: ${red}[No]${reset} "
-                else
-                    echo -e " ${white}${d%/}: ${green}[Yes]${reset} "
-                fi
-        fi
-    done
-}
-
-function CheckUpdate_New3() {
-    # Check Repos For Updates & display Yes or No
-    for d in */; do
-        if [ -d "$d/.git" ]; then 
-			# Use a subshell () instead of 'cd -' to safely isolate directory changes
-            (
-                cd "$d" || exit 1
-                
-                # Compare local HEAD with the upstream tracking branch
-                if [ "$(git rev-parse HEAD)" = "$(git rev-parse @{u})" ]; then
-                    echo -e " ${white}${d%/}: ${red}[No]${reset} "
-                else
-                    echo -e " ${white}${d%/}: ${green}[Yes]${reset} "
-                fi
-		else
-			echo -e " ${white}${d%/}: ${red} [ Not A Git Folder! ] ${reset} "
-        fi
-    	)
-	done
-}
-
-function CheckUpdate_New4() {
-    # Check Repos For Updates & display Yes or No
-    for d in */; do
-        if [ -d "$d/.git" ]; then
-			# Use a subshell () instead of 'cd -' to safely isolate directory changes
-            (
-                cd "$d" || exit 1
-                
-               DisplayUpdateStatus # Function Call
-		else
-			echo -e " ${white}${d%/}: ${red} [ Not A Git Folder! ] ${reset} "
-        )
-		fi
-    done
-}
-
 
 
 function UpdateRepo() {
