@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # This script checks subdirectories to see if they are Git repos.
-# Last Updated: Wed July 29, 2026
+# Last Updated: Wed Aug 05, 2026
 
 # ShellCheck: Disable color warnings.
 # shellcheck disable=SC2154
@@ -73,6 +73,10 @@ fi
 
  RunChecks | column -t
 # RunChecks 
+
+# New Aug 08, 2026
+  # CheckUpdate_New | comumn -t
+  
 
  NewLine
  DisplayLine
