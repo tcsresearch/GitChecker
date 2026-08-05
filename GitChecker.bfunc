@@ -170,9 +170,9 @@ function CheckUpdate_New2() {
     # Check Repos For Updates & display Yes or No
     for d in */; do
         if [ -d "$d/.git" ]; then
-                cd "$d" || exit 1
+                cd "$d" || return 1
                 # Fetch upstream data quietly
-                git fetch &>/dev/null || exit 1
+                git fetch &>/dev/null || return 1
                 # Compare local HEAD with the upstream tracking branch
                 if [ "$(git rev-parse HEAD)" = "$(git rev-parse @{u})" ]; then
                     echo -e " ${white}${d%/}: ${red}[No]${reset} "
@@ -187,9 +187,9 @@ function CheckUpdate_New3() {
     # Check Repos For Updates & display Yes or No
     for d in */; do
         if [ -d "$d/.git" ]; then
-                cd "$d" || exit 1
+                cd "$d" || return 1
                 # Fetch upstream data quietly
-                git fetch &>/dev/null || exit 1
+                git fetch &>/dev/null || return 1
                 # Compare local HEAD with the upstream tracking branch
                 if [ "$(git rev-parse HEAD)" = "$(git rev-parse @{u})" ]; then
                     echo -e " ${white}${d%/}: ${red}[No]${reset} "
