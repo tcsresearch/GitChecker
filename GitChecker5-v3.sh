@@ -75,7 +75,7 @@ fi
 # RunChecks 
 
 # New Aug 08, 2026
-  # CheckUpdate_New | comumn -t
+  # CheckUpdate_New | column -t
   
 
  NewLine
