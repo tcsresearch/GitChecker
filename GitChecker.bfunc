@@ -17,7 +17,8 @@
 
 
 ##################################################################################################
-
+# Display Functions #																			 #
+##################################################################################################
 
 function DisplayLine() {
 	echo " ${brightblue}--------------------------------------------------${reset} "
@@ -43,6 +44,8 @@ function DisplayBanner() {
 	# DisplayLine
 	echo " ${brightblue} Git Status Of Directories Is Displayed Below: ${reset}"
 }
+
+
 
 function ShowConfig() {
 
@@ -99,6 +102,22 @@ function ChecksBanner() {
 	echo " ${brightyellow} Folder Name	   		    Is Git?	Update Available? ${reset} "
 	echo " "
 }
+
+function DisplayUpdateStatus() { # For use within the CheckUpdate_New function
+# Fetch upstream data quietly
+                git fetch &>/dev/null || return 1
+                # Compare local HEAD with the upstream tracking branch
+                if [ "$(git rev-parse HEAD)" = "$(git rev-parse @{u})" ]; then
+                    echo -e " ${white}${d%/}: ${red}[No]${reset} "
+                else
+                    echo -e " ${white}${d%/}: ${green}[Yes]${reset} "
+                fi	
+}
+
+
+##################################################################################################
+# Main Functions #   																			 #
+##################################################################################################
 
 function RunChecks() {
 # Run Checks  
@@ -201,6 +220,19 @@ function CheckUpdate_New3() {
         fi
     done
 }
+
+function CheckUpdate_New4() {
+    # Check Repos For Updates & display Yes or No
+    for d in */; do
+        if [ -d "$d/.git" ]; then
+                cd "$d" || return 1
+                DisplayUpdateStatus # Function Call
+		else
+			echo -e " ${white}${d%/}: ${red} [ Not A Git Folder! ] ${reset} "
+        fi
+    done
+}
+
 
 
 function UpdateRepo() {
