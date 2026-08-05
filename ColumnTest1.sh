@@ -88,8 +88,9 @@ fi
 ###############################################################################################################
 
 
-paste <(RunChecks) <(CheckUpdate_New) | column -t -s $'\t'
+# paste <(RunChecks) <(CheckUpdate_New) | column -t -s $'\t'
 
+paste <(ChecksBanner) <(RunChecks) <(CheckUpdate_New) | column -t -s $'\t'
 
 
  NewLine
