@@ -218,9 +218,9 @@ function CheckUpdate_New3() {
                 fi
 		else
 			echo -e " ${white}${d%/}: ${red} [ Not A Git Folder! ] ${reset} "
-        )
-		fi
-    done
+        fi
+    	)
+	done
 }
 
 function CheckUpdate_New4() {
