@@ -158,15 +158,27 @@ function CheckUpdate_New() {
 
 
 function CheckUpdate_New2() {
-# Check Repos For Updates & display Yes or No
-         for d in */; do
-           if [ -d "$d/.git" ]; then
-             cd "$d" || return
-             git fetch &>/dev/null && [ $(git rev-parse HEAD) = $(git rev-parse @{u}) ] && echo " ${white} $d: ${red} [No]  ${reset} " || echo " ${white} $d: ${green} [Yes] ${reset} "
-             cd - || return
-           fi
-         done
+    # Check Repos For Updates & display Yes or No
+    for d in */; do
+        if [ -d "$d/.git" ]; then
+            # Use a subshell () instead of 'cd -' to safely isolate directory changes
+            (
+                cd "$d" || exit 1
+                
+                # Fetch upstream data quietly
+                git fetch &>/dev/null || exit 1
+                
+                # Compare local HEAD with the upstream tracking branch
+                if [ "$(git rev-parse HEAD)" = "$(git rev-parse @{u})" ]; then
+                    echo -e " ${white}${d%/}: ${red}[No]${reset} "
+                else
+                    echo -e " ${white}${d%/}: ${green}[Yes]${reset} "
+                fi
+            )
+        fi
+    done
 }
+
 
 
 function UpdateRepo() {
