@@ -206,9 +206,7 @@ function CheckUpdate_New3() {
     # Check Repos For Updates & display Yes or No
     for d in */; do
         if [ -d "$d/.git" ]; then 
-			# Use a subshell () instead of 'cd -' to safely isolate directory changes
-            (
-                cd "$d" || exit 1
+			cd "$d" || return 1
                 
                 # Compare local HEAD with the upstream tracking branch
                 if [ "$(git rev-parse HEAD)" = "$(git rev-parse @{u})" ]; then
@@ -219,7 +217,6 @@ function CheckUpdate_New3() {
 		else
 			echo -e " ${white}${d%/}: ${red} [ Not A Git Folder! ] ${reset} "
         fi
-    	)
 	done
 }
 
