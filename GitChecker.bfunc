@@ -157,7 +157,16 @@ function CheckUpdate_New() {
 }
 
 
-
+function CheckUpdate_New2() {
+# Check Repos For Updates & display Yes or No
+         for d in */; do
+           if [ -d "$d/.git" ]; then
+             cd "$d" || return
+             git fetch &>/dev/null && [ $(git rev-parse HEAD) = $(git rev-parse @{u}) ] && echo " ${white} $d: ${red} [No]  ${reset} " || echo " ${white} $d: ${green} [Yes] ${reset} "
+             cd - || return
+           fi
+         done
+}
 
 
 function UpdateRepo() {
