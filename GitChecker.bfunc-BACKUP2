@@ -1,0 +1,268 @@
+#!/usr/bin/env bash
+
+# This function library checks subdirectories to see if they are Git repos.
+# Last Updated: Wed Jul 29, 2026.
+
+# ShellCheck: Disable color warnings.
+# shellcheck disable=SC2154
+
+# ShellCheck: Disable export warnings.
+# shellcheck disable=SC2034 
+
+
+# TODO: Add CASE statment for --show-git-only and --show-nongit-only and --show-all
+# 	    Add 'git pull' feature to update all repos via --update-all
+#       Add feature to show update available with listing.
+
+
+
+##################################################################################################
+
+
+function DisplayLine() {
+	echo " ${brightblue}--------------------------------------------------${reset} "
+}
+
+function DisplayLine_U() {
+        echo " ${brightblue}__________________________________________________${reset} "
+}
+
+
+function NewLine() {
+	echo " "
+}
+
+function NewLineCinema() {
+	NewLine
+	DisplayLine
+	NewLine
+}
+
+function DisplayBanner() {
+	echo " ${brightyellow} GitChecker - Version $VERSION ${reset} "
+	# DisplayLine
+	echo " ${brightblue} Git Status Of Directories Is Displayed Below: ${reset}"
+}
+
+function ShowConfig() {
+
+	# Version / Last Updated
+	echo " ${brightwhite} Version Settings ${reset} "
+	DisplayLine
+	echo " ${brightyellow}   Version: $VERSION ${reset} "
+	echo " ${brightyellow}   Last Updated: $LAST_UPDATED ${reset} "
+	echo " "
+
+	# Colors, Config, & Functions Files
+	echo " ${brightwhite} File Settings ${reset} "
+	DisplayLine
+	echo " ${brightyellow}   Colors File: $COLORS_FILE ${reset} "
+	echo " ${brightyellow}   Config File: $CONFIG_FILE ${reset} "
+	echo " ${brightyellow}   Functions File: $FUNCTIONS_FILE ${reset} "
+	echo " "
+
+	# Display Settings
+	echo " ${brightwhite} Display Settings ${reset} "
+	DisplayLine
+   	echo " ${brightyellow}   Show All: $SHOW_ALL ${reset} "
+   	echo " ${brightyellow}   Show Git Only: $SHOW_GIT_ONLY ${reset} "
+   	echo " ${brightyellow}   Show NonGit Only: $SHOW_NONGIT_ONLY ${reset} "
+	echo " "
+
+	# CheckUpdate Settings
+        echo " ${brightwhite} CheckUpdate Settings ${reset} "
+        DisplayLine
+        echo " ${brightyellow}   CheckUpdate: $CHECKUPDATE ${reset} "
+        echo " ${brightyellow}   CheckUpdate All: $CHECKUPDATE_ALL ${reset} "
+        echo " "
+
+	# Update Settings
+   	echo " ${brightwhite} Update Settings ${reset} "
+	DisplayLine
+	echo " ${brightyellow}   Update: $UPDATE ${reset} "
+   	echo " ${brightyellow}   Update All: $UPDATE_ALL ${reset} "
+	echo " "
+}
+
+
+
+function AlignOutput() { # Not currently used.
+# Aligns the first column to 15 characters, left-justified
+    printf "%-15s %s\n" "Name" "Status"
+    printf "%-15s %s\n" "ServiceA" "Running"
+    printf "%-15s %s\n" "ServiceB" "Stopped"
+}
+
+
+function ChecksBanner() {
+	# New banner header for display of folders provided by RunChecks().
+	echo " ${brightyellow} Folder Name	   		    Is Git?	Update Available? ${reset} "
+	echo " "
+}
+
+function RunChecks() {
+# Run Checks  
+	for d in */; do
+          if [ -d "$d/.git" ]; then
+             echo " ${white} $d: ${green} [Yes] ${reset} "
+     	  else 
+  	     echo " ${white} $d: ${red} [No]  ${reset} "
+     	  fi
+	done
+}
+
+
+function CheckUpdate() {
+# Check Repos For Updates
+# TODO: Modify for single repo usage specified by cmdline parameter.
+	 for d in */; do
+                (
+          if [ -d "$d/.git" ]; then
+             cd "$d" || return
+	     git fetch
+	     git status -uno
+	     cd - || return
+	  fi
+	        )
+	done
+}
+
+
+function CheckUpdate_All() {
+# Check Repos For Updates
+         for d in */; do
+                (
+          if [ -d "$d/.git" ]; then
+             cd "$d" || return
+             git fetch
+             git status -uno
+             cd - || return
+          fi
+                )
+        done
+}
+
+
+function CheckUpdate_New() {
+# Check Repos For Updates & display Yes or No
+         for d in */; do
+                (
+          if [ -d "$d/.git" ]; then
+             cd "$d" || return
+             git fetch &>/dev/null && [ $(git rev-parse HEAD) = $(git rev-parse @{u}) ] && echo " ${white} $d: ${red} [No]  ${reset} " || echo " ${white} $d: ${green} [Yes] ${reset} "
+             cd - || return
+          fi
+                )
+        done
+}
+
+
+
+
+
+function UpdateRepo() {
+# Update Repos  
+# TODO: Modify for single repo usage specified by cmdline parameter.
+	for d in */; do 
+		(
+          if [ -d "$d/.git" ]; then
+             cd "$d" || return
+             git pull
+             cd - || return
+          fi
+		)
+	done
+}
+
+function UpdateRepo_All() {
+# Update Repos
+        for d in */; do
+                (
+          if [ -d "$d/.git" ]; then
+             cd "$d" || return
+             git pull
+             cd - || return
+          fi
+                )
+        done
+}
+
+
+
+###################################################################
+# CASE Statement #                                                #
+###################################################################
+function RunCase() {
+	# Loop through all arguments
+	while [[ "$#" -gt 0 ]]; do
+    	  case "$1" in
+		  --show-config)
+	   	    ShowConfig
+		    ;;
+  		  --show-all)
+            	    SHOW_ALL=true
+            	  ;;
+        	--show-git-only)
+            	    SHOW_GIT_ONLY=true
+            	  ;;
+        	--show-nongit-only)
+            	  SHOW_NONGIT_ONLY=true
+            	  ;;
+	  	--checkupdate) # For a single repo
+		  CHECKUPDATE=true
+		  ;;
+		--checkupdate-all) # For all repos
+		  CHECKUPDATE_ALL=true
+		  ;;
+        	--update) # For a single repo
+            	  UPDATE=true
+            	  ;;
+        	--update-all) # For all repos
+            	  UPDATE_ALL=true
+            	  ;;
+        	*)
+            	  echo "Unknown parameter passed: $1"
+            	  echo "Usage: $0 [--show-config] [--show-all] [--show-git-only] [--show-nongit-only] [--checkupdate] [--checkupdate-all] [--update] [--update-all]"
+            	  exit 1
+            	  ;;
+    	esac
+    	shift # Move to the next argument
+	done
+}
+
+
+# --- Script Logic Begins Here ---
+function ScriptLogic() {
+	if [ "$SHOW_ALL" = true ]; then
+           RunChecks
+	elif [ "$SHOW_GIT_ONLY" = true ]; then
+     	   echo ${red} "Not Implemented Yet! ${reset}"
+	elif [ "$SHOW_NONGIT_ONLY" = true ]; then
+     	   echo ${red} "Not Implemented Yet! ${reset}"
+	fi
+
+ if [ "$CHECKUPDATE" = true ]; then
+           echo ${green} "Checking Single Repo For Updates... ${reset}"
+           CheckUpdate
+           echo " "
+        elif [ "$CHECKUPDATE_ALL" = true ]; then
+           echo ${green} "Checking All Repos For Updates... ${reset}"
+           CheckUpdate_All
+           echo " "
+        fi
+
+
+	if [ "$UPDATE" = true ]; then
+    	   echo ${green} "Updating Single Repo... ${reset}"
+	   UpdateRepo
+           echo " "
+	elif [ "$UPDATE_ALL" = true ]; then
+    	   echo ${green} "Updating All Repos... ${reset}"
+	   UpdateRepo_All
+	   echo " "
+	fi
+}
+
+
+
+##################################################################
