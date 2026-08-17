@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # This script checks subdirectories to see if they are Git repos.
-# Last Updated: Wed Aug 05, 2026
+# Last Updated: Mon Aug 17, 2026
 
 # ShellCheck: Disable color warnings.
 # shellcheck disable=SC2154
@@ -16,15 +16,15 @@
 #################################################################################################
 
 # Define Colors File & Location
-COLORS_DIR="$(pwd)"
+COLORS_DIR="$(pwd)/config"
 COLORS_FILE="Colors.conf"
 
 # Define Config File & Location
-CONFIG_DIR="$(pwd)"
+CONFIG_DIR="$(pwd)/config"
 CONFIG_FILE="GitChecker.conf"
 
 # Define Functions File & Location
-FUNCTIONS_DIR="$(pwd)"
+FUNCTIONS_DIR="$(pwd)/functions"
 FUNCTIONS_FILE="GitChecker.bfunc"
 
 
