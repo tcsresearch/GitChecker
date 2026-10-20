@@ -1,7 +1,9 @@
+<img src="https://github.com/tcsresearch/GitChecker/blob/main/GitChecker_Logo.jpg">
+
 # GitChecker
 Checks to see if folders are Git repos or not, with Git repo update/checkupdate functionality in development. 
 <p>
-  <img src="https://github.com/tcsresearch/GitChecker/blob/main/Screenshot_2026-04-30_15-24-59.png"
+  <img src="https://github.com/tcsresearch/GitChecker/blob/main/Screenshot_2026-04-30_15-24-59.png">
 </p>
 
 <hr>
