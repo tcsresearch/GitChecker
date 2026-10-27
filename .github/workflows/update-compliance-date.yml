@@ -2,7 +2,7 @@ name: Update ShellCheck Compliance Date
 
 on:
   workflow_run:
-    workflows: ["ShellCheck_njs24", "ShellCheck_njs24-bfuncOnly"]
+    workflows: ["ShellCheck_njs24", "ShellCheck .bfunc files"]
     types:
       - completed
 
