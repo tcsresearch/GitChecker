@@ -2,7 +2,7 @@ function DisplayUpdateStatus() { # For use within the CheckUpdate_New function
 # Fetch upstream data quietly
                 git fetch &>/dev/null || return 1
                 # Compare local HEAD with the upstream tracking branch
-                if [ "$(git rev-parse HEAD)" = "$(git rev-parse @{u})" ]; then
+                if [ "$(git rev-parse HEAD)" = "$(git rev-parse @{u};)" ]; then
                     echo -e " ${white}${d%/}: ${red}[No]${reset} "
                 else
                     echo -e " ${white}${d%/}: ${green}[Yes]${reset} "
