@@ -1,13 +1,24 @@
 function DisplayUpdateStatus() { # For use within the CheckUpdate_New function
 # Fetch upstream data quietly
-                git fetch &>/dev/null || return 1
-                # Compare local HEAD with the upstream tracking branch
-                if [ "$(git rev-parse HEAD)" = "$(git rev-parse @{u})" ]; then
-                    echo -e " ${white}${d%/}: ${red}[No]${reset} "
-                else
-                    echo -e " ${white}${d%/}: ${green}[Yes]${reset} "
-                fi	
+	git fetch &>/dev/null || return 1
+
+	# Define vars for LOCAL, REMOTE, and BASE
+	LOCAL=$(git rev-parse HEAD)
+	REMOTE=$(git rev-parse @{u})
+	BASE=$(git merge-base HEAD @{u})
+
+	if [ "$LOCAL" = "$REMOTE" ]; then
+    	echo "Up-to-date"
+	elif [ "$LOCAL" = "$BASE" ]; then
+    	echo "Need to pull (You are behind)"
+	elif [ "$REMOTE" = "$BASE" ]; then
+    	echo "Need to push (You are ahead)"
+	else
+    	echo "Diverged (You need to merge or rebase)"
+	fi
 }
+
+
 
 
 ##########################################################################################################################################
