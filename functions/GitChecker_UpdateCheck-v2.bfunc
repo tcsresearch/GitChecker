@@ -1,3 +1,5 @@
+# shellcheck disable=SC1083 
+
 function DisplayUpdateStatus() { # For use within the CheckUpdate_New function
 # Fetch upstream data quietly
 		
