@@ -55,3 +55,12 @@ Checks to see if folders are Git repos or not, with Git repo update/checkupdate 
   - Added GitChecker.bfunc which will be the basis going forward (SplitConfig Enabled) <br>
   - GitChecker4.sh replaced GitChecker3.sh and adds an UpdateRepos function that currently needs to be called manually by modifying the script. <br>
 </p>
+
+<hr>
+
+<p> <h4> ShellCheck Compliance </h4>
+  :white_check_mark: This code was verified as ShellCheck compliant as of 10/27/2026. <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Code added after this date may or may not remain in compliance.
+</p>
+<hr>
+
