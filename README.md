@@ -6,6 +6,13 @@ Checks to see if folders are Git repos or not, with Git repo update/checkupdate 
   <img src="https://github.com/tcsresearch/GitChecker/blob/main/Screenshot_2026-04-30_15-24-59.png">
 </p>
 
+### Project Status
+<!-- SHELLCHECK_COMPLIANCE_START -->
+**Shellcheck Date Of Compliance:** Pending execution
+<!-- SHELLCHECK_COMPLIANCE_END -->
+
+
+
 <hr>
 <p> <h4> ShellCheck Compliance </h4>
   :white_check_mark: This code was verified as ShellCheck compliant as of 05/31/2026. <br>
