@@ -228,28 +228,28 @@ function ScriptLogic() {
 	if [ "$SHOW_ALL" = true ]; then
            RunChecks
 	elif [ "$SHOW_GIT_ONLY" = true ]; then
-     	   echo ${red} "Not Implemented Yet! ${reset}"
+     	   echo "${red} Not Implemented Yet! ${reset}"
 	elif [ "$SHOW_NONGIT_ONLY" = true ]; then
-     	   echo ${red} "Not Implemented Yet! ${reset}"
+     	   echo "${red} Not Implemented Yet! ${reset}"
 	fi
 
  if [ "$CHECKUPDATE" = true ]; then
-           echo ${green} "Checking Single Repo For Updates... ${reset}"
+           echo "${green} Checking Single Repo For Updates... ${reset}"
            CheckUpdate
            echo " "
         elif [ "$CHECKUPDATE_ALL" = true ]; then
-           echo ${green} "Checking All Repos For Updates... ${reset}"
+           echo "${green} Checking All Repos For Updates... ${reset}"
            CheckUpdate_All
            echo " "
         fi
 
 
 	if [ "$UPDATE" = true ]; then
-    	   echo ${green} "Updating Single Repo... ${reset}"
+    	   echo "${green} Updating Single Repo... ${reset}"
 	   UpdateRepo
            echo " "
 	elif [ "$UPDATE_ALL" = true ]; then
-    	   echo ${green} "Updating All Repos... ${reset}"
+    	   echo "${green} Updating All Repos... ${reset}"
 	   UpdateRepo_All
 	   echo " "
 	fi
