@@ -1,7 +1,12 @@
 function DisplayUpdateStatus() { # For use within the CheckUpdate_New function
 # Fetch upstream data quietly
-	git fetch &>/dev/null || return 1
-
+		
+	# Multi-Repo Scripting Tip
+		# Since this script uses return 1 on a failed git fetch, if it encounters a repository with network issues, bad credentials, or an unconfigured upstream tracking branch, the entire script (or function) will instantly terminate.
+		# If you are looping through multiple directories and want to skip broken ones instead of crashing the whole process, swap return 1 out for a continue:
+			# git fetch &>/dev/null || return 1
+			git fetch &>/dev/null || { echo -e " ${white}${d%/}: ${yellow}[Error]${reset} "; continue; }
+	
 	# Define vars for LOCAL, REMOTE, and BASE
 	LOCAL=$(git rev-parse HEAD)
 	REMOTE=$(git rev-parse @{u})
